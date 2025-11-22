@@ -6,11 +6,41 @@ body {
     background-color: black;
 }
 nav {
-    background-color:floralwhite;
+    background-color:azure;
     width: 200px;
     height: 100%;
-    
 }
 ul {
     list-style: none;
+}
+#home {
+    &:hover {
+        color: gold;
+    }
+    
+}
+#mylists {
+    &:hover {
+        color: gold;
+    }
+}
+#appearance {
+    &:hover {
+        color: gold;
+    }
+}
+#settings {
+    &:hover {
+        color: gold;
+    }
+}
+#help {
+    &:hover {
+        color: gold;
+    }
+}
+#contactus {
+    &:hover {
+        color: gold;
+    }
 }
