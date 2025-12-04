@@ -11,4 +11,70 @@ body {
   background: #f3f4f8;
   color: #222;
 }
+/* ========== Top bar ========== */
 
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: #0effa7; /* soft green */
+  color: #08220c;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.top-bar__title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+}
+
+.top-bar__lang {
+  font-size: 0.9rem;
+}
+
+.top-bar__lang label {
+  margin-right: 0.5rem;
+}
+
+/* ========== Main layout ========== */
+
+.layout {
+  max-width: 1150px;
+  margin: 1.5rem auto;
+  padding: 0 1rem 2rem;
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ========== Panels / cards ========== */
+
+.panel {
+  background: #ffffff;
+  padding: 1rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid #e2e5f0;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: sticky;
+  top: 1rem;
+  align-self: flex-start;
+}
