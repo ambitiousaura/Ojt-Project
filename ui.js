@@ -278,3 +278,73 @@ function getVisibleTasks(viewState) {
     totalItems: filtered.length
   };
 }
+
+// Render function: draws the current view into the DOM
+function render(viewState, elements) {
+  elements.taskList.innerHTML = "";
+  const result = getVisibleTasks(viewState);
+  const items = result.items;
+
+  if (items.length === 0) {
+    const li = document.createElement("li");
+    li.textContent = "No tasks yet.";
+    li.className = "task-item empty";
+    li.setAttribute("role", "listitem");
+    elements.taskList.appendChild(li);
+  } else {
+    items.forEach((task) => {
+      const li = document.createElement("li");
+      li.className = "task-item";
+      li.setAttribute("role", "listitem");
+      li.dataset.id = task.id;
+
+      const label = document.createElement("label");
+      label.className = "task-label";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.className = "task-checkbox";
+      checkbox.checked = task.completed;
+      checkbox.setAttribute("aria-label", "Mark task as complete");
+
+      const span = document.createElement("span");
+      span.className = "task-text";
+      if (task.completed) {
+        span.classList.add("completed");
+      }
+      span.textContent = task.text;
+
+      label.appendChild(checkbox);
+      label.appendChild(span);
+
+      const editBtn = document.createElement("button");
+      editBtn.type = "button";
+      editBtn.textContent = "Edit";
+      editBtn.className = "task-btn edit-btn";
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.type = "button";
+      deleteBtn.textContent = "Delete";
+      deleteBtn.className = "task-btn delete-btn";
+
+      li.appendChild(label);
+      li.appendChild(editBtn);
+      li.appendChild(deleteBtn);
+      elements.taskList.appendChild(li);
+    });
+  }
+
+  // Pagination controls
+  elements.pageInfo.textContent = viewState.page + " / " + result.totalPages;
+  elements.prevBtn.disabled = viewState.page <= 1;
+  elements.nextBtn.disabled = viewState.page >= result.totalPages;
+
+  // Undo/redo buttons
+  elements.undoBtn.disabled = !canUndo();
+  elements.redoBtn.disabled = !canRedo();
+
+  // Filter chip active state
+  elements.filterAllBtn.classList.toggle("chip--active", viewState.filter === "all");
+  elements.filterActiveBtn.classList.toggle("chip--active", viewState.filter === "active");
+  elements.filterCompletedBtn.classList.toggle("chip--active", viewState.filter === "completed");
+}
