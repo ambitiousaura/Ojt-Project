@@ -204,3 +204,77 @@ function setupDemoListener(viewState, elements) {
     viewState.page = 1;
   });
 }
+
+function setupTaskListListeners(viewState, elements) {
+  elements.taskList.addEventListener("click", function (event) {
+    const target = event.target;
+    const li = target.closest(".task-item");
+    if (!li) return;
+    const id = li.dataset.id;
+    if (target.classList.contains("edit-btn")) {
+      const currentText = li.querySelector(".task-text").textContent;
+      const newText = window.prompt("Edit task", currentText);
+      if (newText !== null) {
+        editTask(id, newText);
+      }
+    } else if (target.classList.contains("delete-btn")) {
+      const ok = window.confirm("Delete this task?");
+      if (ok) {
+        deleteTask(id);
+      }
+    }
+  });
+}
+
+// Apply search, filter, sort, and pagination on the full tasks list
+function getVisibleTasks(viewState) {
+  const searchLower = viewState.search.toLowerCase();
+
+  // Filter by search text
+  let filtered = viewState.tasks.filter(function (task) {
+    return task.text.toLowerCase().includes(searchLower);
+  });
+
+  // Filter by status (all/active/completed)
+  if (viewState.filter === "active") {
+    filtered = filtered.filter(function (task) {
+      return !task.completed;
+    });
+  } else if (viewState.filter === "completed") {
+    filtered = filtered.filter(function (task) {
+      return task.completed;
+    });
+  }
+
+  // Sorting
+  if (viewState.sort === "az") {
+    filtered.sort(function (a, b) {
+      return a.text.localeCompare(b.text);
+    });
+  } else if (viewState.sort === "za") {
+    filtered.sort(function (a, b) {
+      return b.text.localeCompare(a.text);
+    });
+  } else if (viewState.sort === "completed") {
+    filtered.sort(function (a, b) {
+      return (b.completed === true) - (a.completed === true);
+    });
+  }
+  // default: newest first, already handled by insertion order.
+
+  // Pagination
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  if (viewState.page > totalPages) {
+    viewState.page = totalPages;
+  }
+
+  const startIndex = (viewState.page - 1) * PAGE_SIZE;
+  const endIndex = startIndex + PAGE_SIZE;
+  const pageItems = filtered.slice(startIndex, endIndex);
+
+  return {
+    items: pageItems,
+    totalPages: totalPages,
+    totalItems: filtered.length
+  };
+}
