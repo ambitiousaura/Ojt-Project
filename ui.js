@@ -56,6 +56,11 @@ function getDomElements() {
     exportBtn: document.getElementById("export-json"),
     importBtn: document.getElementById("import-json"),
     demoBtn: document.getElementById("demo-tests"),
+
+    editModal: document.getElementById("edit-modal"),
+    editForm: document.getElementById("edit-form"),
+    editInput: document.getElementById("edit-input"),
+    cancelEditBtn: document.getElementById("cancel-edit"),
   };
 }
 
@@ -94,6 +99,7 @@ function setupAllEventListeners(viewState, elements) {
   setupExportImportListeners(viewState, elements);
   setupDemoListener(viewState, elements);
   setupTaskListListeners(viewState, elements);
+  setupEditModalListeners(elements);
 }
 
 function setupTaskFormListener(viewState, elements) {
@@ -239,12 +245,58 @@ function setupTaskListListeners(viewState, elements) {
     const id = li.dataset.id;
     if (target.classList.contains("edit-btn")) {
       const currentText = li.querySelector(".task-text").textContent;
-      const newText = window.prompt("Edit task", currentText);
-      if (newText !== null) {
-        editTask(id, newText);
-      }
+      openEditModal(id, currentText, elements);
     } else if (target.classList.contains("delete-btn")) {
       deleteTask(id);
+    }
+  });
+}
+
+function openEditModal(taskId, currentText, elements) {
+  elements.editInput.value = currentText;
+  elements.editModal.classList.add("modal--open");
+  elements.editInput.focus();
+  elements.editInput.select();
+  
+  // Store the task ID on the form for later use
+  elements.editForm.dataset.taskId = taskId;
+}
+
+function closeEditModal(elements) {
+  elements.editModal.classList.remove("modal--open");
+  elements.editInput.value = "";
+  delete elements.editForm.dataset.taskId;
+}
+
+function setupEditModalListeners(elements) {
+  // Handle form submission
+  elements.editForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const taskId = elements.editForm.dataset.taskId;
+    const newText = elements.editInput.value.trim();
+    
+    if (newText && taskId) {
+      editTask(taskId, newText);
+      closeEditModal(elements);
+    }
+  });
+
+  // Handle cancel button
+  elements.cancelEditBtn.addEventListener("click", function () {
+    closeEditModal(elements);
+  });
+
+  // Close modal when clicking outside
+  elements.editModal.addEventListener("click", function (e) {
+    if (e.target === elements.editModal) {
+      closeEditModal(elements);
+    }
+  });
+
+  // Close modal on Escape key
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && elements.editModal.classList.contains("modal--open")) {
+      closeEditModal(elements);
     }
   });
 }

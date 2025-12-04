@@ -128,6 +128,25 @@
     </aside>
   </main>
 
+  <!-- Edit Modal -->
+  <div id="edit-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+    <div class="modal-content">
+      <h3 id="modal-title">Edit Task</h3>
+      <form id="edit-form">
+        <input
+          type="text"
+          id="edit-input"
+          required
+          autocomplete="off"
+        >
+        <div class="modal-actions">
+          <button type="submit" class="modal-btn modal-btn--primary">Save</button>
+          <button type="button" id="cancel-edit" class="modal-btn modal-btn--secondary">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Entry script (ES6 module) -->
   <script type="module" src="main.js"></script>
 </body>
