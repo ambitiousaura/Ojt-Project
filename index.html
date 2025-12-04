@@ -39,3 +39,36 @@
           </div>
         </form>
       </section>
+
+        <!-- Filters, search, sort, undo/redo -->
+      <section class="panel controls" aria-label="Task controls">
+        <div class="row">
+          <input
+            id="search-input"
+            type="search"
+            placeholder="Search tasks..."
+            aria-label="Search tasks"
+          >
+        </div>
+
+        <div class="row">
+          <label for="sort-select" data-i18n="sortLabel">Sort</label>
+          <select id="sort-select">
+            <option value="default">Newest</option>
+            <option value="az">A → Z</option>
+            <option value="za">Z → A</option>
+            <option value="completed">Completed first</option>
+          </select>
+        </div>
+
+        <div class="row filter-row" aria-label="Task filter">
+          <button type="button" id="filter-all" class="chip chip--active">All</button>
+          <button type="button" id="filter-active" class="chip">Active</button>
+          <button type="button" id="filter-completed" class="chip">Completed</button>
+        </div>
+
+        <div class="row">
+          <button type="button" id="undo-btn" data-i18n="undoButton">Undo</button>
+          <button type="button" id="redo-btn" data-i18n="redoButton">Redo</button>
+        </div>
+      </section>
