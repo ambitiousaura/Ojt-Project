@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="stylish.css">
+    <link rel="stylesheet" href="styles.css">
     <title>Syncly - To-Do List Manager</title>
 </head>
 <body>
@@ -72,6 +72,8 @@
           <button type="button" id="redo-btn" data-i18n="redoButton">Redo</button>
         </div>
       </section>
+
+         
     <!-- Task list + pagination -->
       <section class="panel" aria-label="Task list">
         <h2 class="visually-hidden">Tasks</h2>
@@ -83,4 +85,42 @@
           <button type="button" id="next-page" data-i18n="nextButton">&gt;</button>
         </div>
       </section>
+  
+      !-- RIGHT: Settings & tools -->
+    <aside class="settings panel" aria-label="Settings and tools">
+      <h2>Settings &amp; Tools</h2>
+
+      <section class="settings-section">
+        <h3>Export / Import</h3>
+        <p>Save or restore your tasks using simple JSON.</p>
+        <div class="row">
+          <button type="button" id="export-json">Export tasks as JSON</button>
+        </div>
+        <div class="row">
+          <button type="button" id="import-json">Import tasks from JSON</button>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <h3>Quick e2e smoke test</h3>
+        <p>Fill the board with demo tasks to test search, filters and pagination.</p>
+        <div class="row">
+          <button type="button" id="demo-tests">Run demo tests</button>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <h3>About this app</h3>
+        <p>
+          Framework-free task board focused on performance, accessibility and
+          maintainability. Built with HTML, CSS and vanilla JavaScript modules.
+        </p>
+      </section>
+    </aside>
+  </main>
+    
+    <!-- Entry script (ES6 module) -->
+  <script type="module" src="main.js"></script>
+</body>
+</html> 
         
