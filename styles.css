@@ -1,0 +1,385 @@
+/* ========== Base ========== */
+
+:root {
+  --bg-primary: #f3f4f8;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f9fafb;
+  --bg-hover: #eef2ff;
+  --text-primary: #222;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --text-completed: #9ca3af;
+  --border-primary: #e2e5f0;
+  --border-secondary: #e5e7eb;
+  --border-hover: #c7d2fe;
+  --border-input: #cbd5e1;
+  --topbar-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --topbar-text: #ffffff;
+  --shadow-sm: rgba(15, 23, 42, 0.06);
+  --shadow-md: rgba(0, 0, 0, 0.08);
+}
+
+body.dark-theme {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --bg-hover: #475569;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-completed: #64748b;
+  --border-primary: #334155;
+  --border-secondary: #475569;
+  --border-hover: #64748b;
+  --border-input: #475569;
+  --topbar-bg: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%);
+  --topbar-text: #ffffff;
+  --shadow-sm: rgba(0, 0, 0, 0.3);
+  --shadow-md: rgba(0, 0, 0, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ========== Top bar ========== */
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background: var(--topbar-bg);
+  color: var(--topbar-text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.top-bar__title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+}
+
+.top-bar__controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.top-bar__lang {
+  font-size: 0.9rem;
+}
+
+.top-bar__lang label {
+  margin-right: 0.5rem;
+}
+
+.theme-toggle {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: var(--topbar-text);
+  padding: 0.4rem 0.7rem;
+  font-size: 1.1rem;
+  min-width: auto;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.theme-toggle:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(0);
+}
+
+.theme-icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover .theme-icon {
+  transform: rotate(20deg);
+}
+
+/* ========== Main layout ========== */
+
+.layout {
+  max-width: 1150px;
+  margin: 1.5rem auto;
+  padding: 0 1rem 2rem;
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ========== Panels / cards ========== */
+
+.panel {
+  background: var(--bg-secondary);
+  padding: 1rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-primary);
+  box-shadow: 0 2px 6px var(--shadow-sm);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: sticky;
+  top: 1rem;
+  align-self: flex-start;
+}
+
+/* ========== Generic controls ========== */
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+input[type="text"],
+input[type="search"],
+select {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-input);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+button {
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.15s ease, transform 0.05s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+button:focus,
+input:focus,
+select:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* ========== Filter chips ========== */
+
+.chip {
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-secondary);
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.chip--active {
+  background-color: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+/* ========== Task list ========== */
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: 8px;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-secondary);
+  transition: all 0.3s ease;
+}
+
+.task-item:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--border-hover);
+}
+
+.task-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1 1 auto;
+}
+
+.task-checkbox {
+  width: 1rem;
+  height: 1rem;
+}
+
+.task-text {
+  font-size: 0.95rem;
+}
+
+.task-text.completed {
+  text-decoration: line-through;
+  color: var(--text-completed);
+}
+
+.task-btn {
+  background-color: #3b82f6;
+}
+
+.task-btn:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.delete-btn {
+  background-color: #ef4444;
+}
+
+.delete-btn:hover:not(:disabled) {
+  background-color: #dc2626;
+}
+
+.task-item.empty {
+  justify-content: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* ========== Pagination ========== */
+
+.pagination {
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pagination button {
+  min-width: 2.4rem;
+  padding-inline: 0;
+}
+
+/* ========== Undo bar + status ========== */
+
+.undo-panel {
+  margin-top: 0.25rem;
+}
+
+.undo-bar {
+  width: 100%;
+  border-radius: 8px;
+  background-color: #10b981;
+}
+
+.undo-bar:hover:not(:disabled) {
+  background-color: #059669;
+}
+
+.status-text {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #16a34a;
+}
+
+/* ========== Settings content ========== */
+
+.settings h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.settings-section h3 {
+  margin: 0 0 0.2rem;
+  font-size: 0.98rem;
+}
+
+.settings-section p {
+  margin: 0.15rem 0 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* ========== Utility ========== */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Controls panel grid on wider screens */
+@media (min-width: 650px) {
+  .controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .filter-row {
+    grid-column: 1 / -1;
+  }
+}
