@@ -157,3 +157,50 @@ function setupPaginationListeners(viewState, elements) {
     render(viewState, elements);
   });
 }
+
+function setupLanguageListener(elements) {
+  elements.langSelect.addEventListener("change", function (event) {
+    const newLang = event.target.value;
+    saveLang(newLang);
+    applyTranslations(newLang);
+  });
+}
+
+function setupExportImportListeners(viewState, elements) {
+  elements.exportBtn.addEventListener("click", function () {
+    const tasks = getAllTasks();
+    const json = JSON.stringify(tasks, null, 2);
+    window.alert("A prompt will show your tasks JSON. Copy it to save.");
+    window.prompt("Copy your tasks JSON:", json);
+  });
+  elements.importBtn.addEventListener("click", function () {
+    const json = window.prompt("Paste tasks JSON to import:");
+    if (!json) return;
+    try {
+      const parsed = JSON.parse(json);
+      if (!Array.isArray(parsed)) {
+        window.alert("Invalid JSON format. Expected an array.");
+        return;
+      }
+      replaceAllTasks(parsed);
+      viewState.page = 1;
+    } catch (error) {
+      window.alert("Could not parse JSON: " + error.message);
+    }
+  });
+}
+
+function setupDemoListener(viewState, elements) {
+  elements.demoBtn.addEventListener("click", function () {
+    const sampleTasks = [];
+    for (let i = 1; i <= 12; i++) {
+      sampleTasks.push({
+        id: "demo-" + i,
+        text: `[Demo] task ${i}`,
+        completed: i % 3 === 0
+      });
+    }
+    replaceAllTasks(sampleTasks);
+    viewState.page = 1;
+  });
+}
