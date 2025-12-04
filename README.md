@@ -87,7 +87,7 @@ A modern, feature-rich task management web application built with vanilla JavaSc
 
 ```
 SYNCLY/
-├── indexes.html          # Main HTML entry point
+├── index.html            # Main HTML entry point
 ├── styles.css            # Complete stylesheet with themes
 ├── main.js               # Application entry point
 ├── ui.js                 # DOM manipulation and rendering
@@ -99,7 +99,7 @@ SYNCLY/
 
 ### File Purposes
 
-**indexes.html**
+**index.html**
 - Semantic HTML5 structure
 - ARIA labels for accessibility
 - Form controls with proper labeling
@@ -164,11 +164,11 @@ SYNCLY/
    cd Ojt-Project
    ```
 
-2. **Open in browser**
+2. **Open in browser (recommended: serve from root)**
    ```bash
-   # Simply open indexes.html in your web browser
-   # Option 1: Double-click the file
-   # Option 2: Use a local server (recommended)
+   # GitHub Pages expects a file named `index.html` at the repository root.
+   # Option 1: Double-click `index.html` to open locally (file://)
+   # Option 2: Run a local static server (recommended)
    python -m http.server 8000
    # Then visit http://localhost:8000
    ```
