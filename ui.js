@@ -6,6 +6,7 @@ import {
   addTask,
   editTask,
   deleteTask,
+  toggleTaskComplete,
   undo,
   redo,
   canUndo,
