@@ -101,3 +101,59 @@ function setupTaskFormListener(viewState, elements) {
     elements.taskInput.focus();
   });
 }
+
+function setupSearchListener(viewState, elements) {
+  elements.searchInput.addEventListener("input", debounce(function () {
+    viewState.search = elements.searchInput.value;
+    viewState.page = 1;
+    render(viewState, elements);
+  }, 200));
+}
+
+function setupSortListener(viewState, elements) {
+  elements.sortSelect.addEventListener("change", function () {
+    viewState.sort = elements.sortSelect.value;
+    viewState.page = 1;
+    render(viewState, elements);
+  });
+}
+
+function setupFilterListeners(viewState, elements) {
+  elements.filterAllBtn.addEventListener("click", function () {
+    viewState.filter = "all";
+    viewState.page = 1;
+    render(viewState, elements);
+  });
+  elements.filterActiveBtn.addEventListener("click", function () {
+    viewState.filter = "active";
+    viewState.page = 1;
+    render(viewState, elements);
+  });
+  elements.filterCompletedBtn.addEventListener("click", function () {
+    viewState.filter = "completed";
+    viewState.page = 1;
+    render(viewState, elements);
+  });
+}
+
+function setupUndoRedoListeners(elements) {
+  elements.undoBtn.addEventListener("click", function () {
+    undo();
+  });
+  elements.redoBtn.addEventListener("click", function () {
+    redo();
+  });
+}
+
+function setupPaginationListeners(viewState, elements) {
+  elements.prevBtn.addEventListener("click", function () {
+    if (viewState.page > 1) {
+      viewState.page--;
+      render(viewState, elements);
+    }
+  });
+  elements.nextBtn.addEventListener("click", function () {
+    viewState.page++;
+    render(viewState, elements);
+  });
+}
