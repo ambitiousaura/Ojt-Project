@@ -18,4 +18,24 @@
         <option value="hi">हिन्दी</option>
       </select>
     </div>
-  </header>    
+  </header>
+  <main class="layout" role="main">
+    <!-- LEFT: Task board -->
+    <section class="board">
+
+      <!-- Add task -->
+      <section class="panel" aria-label="Add task">
+        <form id="task-form">
+          <label for="task-input" data-i18n="newTaskLabel">New task</label>
+          <div class="row">
+            <input
+              id="task-input"
+              type="text"
+              required
+              autocomplete="off"
+              placeholder="Add a task and press Enter"
+            >
+            <button type="submit" data-i18n="addButton">Add</button>
+          </div>
+        </form>
+      </section>
