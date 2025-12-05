@@ -313,8 +313,8 @@ select:focus {
 }
 
 .pagination button {
-  min-width: 2.4rem;
-  padding-inline: 0;
+  min-width: 3rem;
+  padding-inline: 0.6rem 1rem;
 }
 
 /* ========== Undo bar + status ========== */
