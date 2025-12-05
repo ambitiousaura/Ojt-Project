@@ -317,6 +317,11 @@ select:focus {
   padding-inline: 0.6rem 1rem;
 }
 
+.prev-btn,
+.next-btn{
+  padding:0.6rem 1.2rem;
+}
+
 /* ========== Undo bar + status ========== */
 
 .undo-panel {
