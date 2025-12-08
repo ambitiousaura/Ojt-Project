@@ -3,6 +3,7 @@
 const STORAGE_KEY = "task-board-tasks";
 
 export function loadTasks() {
+  console.log("loadTasks called"); // Debug log
   const json = localStorage.getItem(STORAGE_KEY);
 
   if (!json) {
@@ -22,6 +23,7 @@ export function loadTasks() {
 }
 
 export function saveTasks(tasks) {
+  console.log("saveTasks called", tasks); // Debug log
   const json = JSON.stringify(tasks);
   localStorage.setItem(STORAGE_KEY, json);
 }
